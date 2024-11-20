@@ -1,0 +1,94 @@
+{
+    "reviews": [
+        {
+            "id": 1,
+            "rating": 5,
+            "text": "Restaurante Il Gusto: El restaurante italiano ofrece una pasta deliciosa y fresca. El chef prepara hábilmente los platos tradicionales. Los precios son bastante razonables para la calidad que ofrecen. El servicio fue impecable y el ambiente muy acogedor."
+        },
+        {
+            "id": 2,
+            "rating": 2,
+            "text": "Bar La Esquina: La comida llegó fría y sin sabor. El camarero parecía malhumorado y poco atento. Los precios son excesivamente altos para la calidad que dan. El local necesita una renovación urgente."
+        },
+        {
+            "id": 3,
+            "rating": 4,
+            "text": "Restaurante Casa Valencia: La paella estaba bien preparada, con un arroz en su punto y mariscos frescos. La sangría complementó perfectamente la comida. El personal es amable aunque el servicio fue un poco lento. La terraza tiene unas vistas espectaculares."
+        },
+        {
+            "id": 4,
+            "rating": 3,
+            "text": "Restaurante Sakura: El sushi es decente pero nada extraordinario. El local está limpio y bien decorado. Los precios son normales para este tipo de restaurante. El servicio podría mejorar en cuanto a rapidez."
+        },
+        {
+            "id": 5,
+            "rating": 1,
+            "text": "Bar & Grill El Gaucho: Terrible experiencia. La carne estaba quemada y dura como una suela. El camarero ignoró nuestras quejas completamente. El precio es un robo considerando la pésima calidad. No volveremos jamás."
+        },
+        {
+            "id": 6,
+            "rating": 5,
+            "text": "Bar Los Caracoles: Las tapas son extraordinarias, especialmente las croquetas caseras y el pulpo a la gallega. La selección de vinos es impresionante. El personal conoce perfectamente la carta y hace recomendaciones acertadas. El ambiente es animado pero no ruidoso."
+        },
+        {
+            "id": 7,
+            "rating": 4,
+            "text": "Restaurante El Rincón: El menú del día ofrece buena relación calidad-precio. Los platos son abundantes y bien presentados. El local es pequeño pero acogedor. El servicio es eficiente aunque algo informal."
+        },
+        {
+            "id": 8,
+            "rating": 2,
+            "text": "Pizzería Bella Napoli: La pizza llegó con ingredientes diferentes a los solicitados. El tiempo de espera fue excesivo. El personal parece desorganizado y poco profesional. Lo único positivo es la ubicación céntrica."
+        },
+        {
+            "id": 9,
+            "rating": 5,
+            "text": "Restaurante Verde & Sano: El restaurante vegetariano supera todas las expectativas. Los platos son creativos y sabrosos. El chef utiliza ingredientes locales y de temporada. El personal es muy atento y conocedor. El ambiente tranquilo invita a repetir."
+        },
+        {
+            "id": 10,
+            "rating": 3,
+            "text": "Restaurante Gran Buffet: El buffet tiene variedad pero la calidad es irregular. Algunos platos estaban fríos. El local es espacioso y luminoso. El personal es amable pero escaso para tanto comensal."
+        },
+        {
+            "id": 11,
+            "rating": 4,
+            "text": "Cafetería Dulce & Salado: Los postres son el punto fuerte del restaurante. El tiramisú es excepcional y la tarta de chocolate divina. El café también es excelente. Los precios son un poco elevados pero vale la pena."
+        },
+        {
+            "id": 12,
+            "rating": 1,
+            "text": "Bar La Tasca: Encontramos un pelo en la sopa y la respuesta del encargado fue despectiva. El pan estaba duro y los cubiertos sucios. El local huele a humedad. Una experiencia para olvidar."
+        },
+        {
+            "id": 13,
+            "rating": 5,
+            "text": "Restaurante Fusión Asia: La cocina fusión sorprende gratamente. Los sabores son únicos y la presentación espectacular. El servicio es atento y profesional. El ambiente es moderno y sofisticado. Los cócteles son muy originales."
+        },
+        {
+            "id": 14,
+            "rating": 2,
+            "text": "Restaurante El Antiguo: El restaurante ha bajado mucho la calidad. Los platos son mediocres y mal presentados. Los precios han subido sin justificación. El servicio es lento y desatento. Una pena porque antes era excelente."
+        },
+        {
+            "id": 15,
+            "rating": 4,
+            "text": "Bar & Burger El Garaje: Las hamburguesas están hechas con carne de primera calidad. El pan es casero y las salsas son caseras. La carta de cervezas artesanales es extensa. El personal es joven y dinámico. El local tiene un diseño industrial muy conseguido."
+        },
+        {
+            "id": 16,
+            "rating": 5,
+            "text": "Taberna La Bodeguita: Excepcional selección de vinos nacionales e internacionales. Las tapas son generosas y muy bien elaboradas. El sumiller demuestra un conocimiento impresionante. La decoración con barricas antiguas crea un ambiente único."
+        },
+        {
+            "id": 17,
+            "rating": 3,
+            "text": "Restaurante Mar Azul: Los mariscos son frescos pero los precios son elevados. La parrillada de pescado estaba bien pero sin sorprender. El local tiene buenas vistas al puerto. El servicio es correcto pero algo frío."
+        },
+        {
+            "id": 18,
+            "rating": 4,
+            "text": "Cafetería El Desayuno: Los huevos benedictinos son espectaculares. El pan recién horneado y los zumos naturales son excelentes. El ambiente es perfecto para empezar el día. El personal es muy atento desde primera hora."
+        }
+    ]
+}

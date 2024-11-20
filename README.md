@@ -16,8 +16,13 @@ conceptos básicos hasta técnicas más avanzadas.
 
 ### Módulo 1: Fundamentos
 - [Expresiones Regulares](notebooks/01_expresiones_regulares.ipynb)
+- [Análisis de Valoraciones](notebooks/01_analisis_de_valoraciones.ipynb)
 - [Modelos N-gramas](notebooks/02_modelos_ngramas.ipynb) - Implementación de modelos de lenguaje basados en n-gramas
   utilizando el corpus Reuters
+
+## 📊 Datasets Incluidos
+
+- [Valoraciones de Restaurantes](datasets/valoraciones_restaurante.json) - Este dataset contiene reseñas de restaurantes en español, ideal para practicar análisis de texto y expresiones regulares.
 
 ## 🛠️ Requisitos Técnicos
 
