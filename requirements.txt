@@ -1,0 +1,30 @@
+# Bibliotecas principales para PLN
+nltk>=3.8
+spacy>=3.7.2
+
+# Bibliotecas científicas y de análisis de datos
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.11.0
+
+# Visualización
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.18.0
+
+# Machine Learning
+scikit-learn>=1.3.0
+
+# Jupyter y entorno de desarrollo
+jupyter>=1.0.0
+notebook>=7.0.0
+ipywidgets>=8.0.0
+
+# Procesamiento de texto
+regex>=2023.0.0
+beautifulsoup4>=4.12.0
+tqdm>=4.66.0
+
+# Formatos y manipulación de archivos
+openpyxl>=3.1.0
+python-docx>=0.8.11
