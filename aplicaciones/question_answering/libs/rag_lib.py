@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from sklearn.neighbors import NearestNeighbors
 from sentence_transformers import SentenceTransformer, util
 import re
@@ -345,7 +346,8 @@ def evaluate_qa_system(models, dataset):
             prediction = model.answer(query=query, context=context, do_sample=False, max_length=2048)
 
             # BLEU
-            bleu_score = sentence_bleu([ground_truth.split()], prediction.split())
+            smoothing_function = SmoothingFunction()
+            bleu_score = sentence_bleu([ground_truth.split()], prediction.split(), smoothing_function=smoothing_function.method1)
             metrics["bleu"].append(bleu_score)
 
             # ROUGE
