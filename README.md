@@ -50,6 +50,7 @@ pip install -r requirements.txt
 import nltk
 nltk.download('reuters')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 ```
 4. Abre los notebooks en Jupyter:
 ```bash
