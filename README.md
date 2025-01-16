@@ -1,12 +1,11 @@
 # Curso de Introducción al Procesamiento del Lenguaje Natural (PLN)
 
-Este repositorio contiene una colección de notebooks y recursos para el curso de Introducción al Procesamiento del Lenguaje
-Natural. El curso está diseñado para estudiantes y profesionales que desean adentrarse en el mundo del PLN, comenzando desde
+Este repositorio contiene una colección de notebooks y recursos para el curso de Procesamiento de Lenguaje Natural. El curso está diseñado para estudiantes y profesionales que desean adentrarse en el mundo del PLN, comenzando desde
 conceptos básicos hasta técnicas más avanzadas.
 
 ## 🎯 Objetivos del Curso
 
-- Comprender los fundamentos del Procesamiento del Lenguaje Natural
+- Comprender los fundamentos de Procesamiento de Lenguaje Natural
 - Aprender a trabajar con diferentes tipos de corpus lingüísticos
 - Desarrollar habilidades prácticas en el preprocesamiento de texto
 - Implementar modelos básicos de PLN
@@ -14,11 +13,44 @@ conceptos básicos hasta técnicas más avanzadas.
 
 ## 📚 Contenido
 
-### Módulo 1: Fundamentos
+### Módulo 1: Preparación de Datos
 - [Expresiones Regulares](notebooks/01_expresiones_regulares.ipynb)
+- [Preprocesamiento de Datos](notebooks/01_Preprocesamiento_Datos.ipynb)
 - [Análisis de Valoraciones](notebooks/01_analisis_de_valoraciones.ipynb)
-- [Modelos N-gramas](notebooks/02_modelos_ngramas.ipynb) - Implementación de modelos de lenguaje basados en n-gramas
-  utilizando el corpus Reuters
+
+### Módulo 2: Modelos n-gramas
+- [Modelos N-gramas](notebooks/02_modelos_ngramas.ipynb)
+- [Naive Bayes](notebooks/02_naive_bayes.ipynb)
+- [Regresion Logística](notebooks/02_regresion_logistica.ipynb)
+
+### Módulo 3: Modelos Vectoriales
+- [Word2Vec](notebooks/03_word2vec.ipynb)
+- [Sherlock Holmes](notebooks/03_embeddings_sherlock_holmes.ipynb)
+- [Wikipedia](notebooks/03_exercise_embeddings_wikipedia.ipynb)
+
+### Módulo 4: Modelos Probabilísticos de Tópicos
+- [LDA](notebooks/04_LDA_Cordis.ipynb)
+- [Extensiones LDA](notebooks/04_Extensiones_LDA.ipynb)
+
+### Módulo 5: Modelos Transformers
+- [MLP](notebooks/05_MLP.ipynb)
+- [Redes de Neuronas](notebooks/05_Red_Neuronas_Keras.ipynb)
+- [Transformers](notebooks/05_Transformers_con_Keras.ipynb)
+- [GPT](notebooks/05_Transformers_GPT.ipynb)
+- [HuggingFace](notebooks/05_Transformers_HuggingFace.ipynb)
+
+### Módulo 6: Ajuste Fino (fine-tuning)
+- [Clasificacion](notebooks/06_Ajuste_Fino_Clasificacion_IMDB.ipynb)
+- [Named Entity Recognition (NER)](notebooks/06_Ajuste_Fino_NER.ipynb)
+
+### Módulo 7: Prompting
+- [Aprendizaje por Contexto](notebooks/07_Ajuste_por_Instrucciones.ipynb)
+- [Evaluación](notebooks/07_Evaluacion_Modelos_Prompts.ipynb)
+
+### Módulo 8: Retrieval Augmented Generation (RAG)
+- [Búsqueda Dispersa y Densa](notebooks/08_Busqueda_Dispersa_y_Densa.ipynb)
+- [RAG Avanzado](notebooks/08_RAG_Avanzado.ipynb)
+
 
 ## 📊 Datasets Incluidos
 
@@ -50,6 +82,7 @@ pip install -r requirements.txt
 import nltk
 nltk.download('reuters')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 ```
 4. Abre los notebooks en Jupyter:
 ```bash
