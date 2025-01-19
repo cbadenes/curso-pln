@@ -224,34 +224,38 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 warnings.filterwarnings("ignore", category=UserWarning, module="transformers.pytorch_utils")
 
+
 class LLMModel:
 
-    def __init__(self, device_setup, model_name="tinyllama", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", use_context=False):
-        self.model_name = model_name
-        self.use_context = use_context
-        self.tokenizer = AutoTokenizer.from_pretrained(model)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model,
-            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,  # Configuración dinámica de precisión
-            device_map=device_setup,
-            cache_dir="./models/" + self.model_name,
-            local_files_only=False
-        )
+    def __init__(self, model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0", cache_dir="./models/TinyLlama-1.1B-Chat-v1.0"):
+        self.device_setup = "mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu")
 
-    def __answer_with_model(self, prompt, do_sample, temperature, top_p, max_length, num_return_sequences, show_prompt):
-        formatted_promt = self.tokenizer.apply_chat_template(conversation=prompt, tokenize=False, return_dict=False, continue_final_message=True)
-        if show_prompt:
-          print(formatted_promt)
-          print("------",len(formatted_promt),"-------")
+        self.model_name = model_name
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_name,
+            torch_dtype = torch.float32 if  self.device_setup == "mps" else (torch.float16 if torch.cuda.is_available() else torch.float32),
+            cache_dir=cache_dir,
+            local_files_only=False
+        ).to( self.device_setup)
+
+    def __answer_with_model(self, prompt, do_sample, temperature, top_p, max_length, show_prompt):
+        formatted_prompt = self.tokenizer.apply_chat_template(conversation=prompt, tokenize=False, return_dict=False,  add_generation_prompt=True)
+
         # Tokenizar
-        inputs = self.tokenizer(formatted_promt, truncation=True, max_length=max_length,return_tensors="pt")
-        inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
+        inputs = self.tokenizer(formatted_prompt, truncation=True, max_length=max_length,return_tensors="pt")
+        inputs = {k: v.to( self.device_setup) for k, v in inputs.items()}
+
+         # Muestra infomacion de log
+        if show_prompt:
+          print(formatted_prompt)
+          print("--- Token size: ---")
+          [print("\t", k, ": ", len(v[0])) for k, v in inputs.items()]
+          print("-------------------")
 
         # Generar respuesta
         outputs = self.model.generate(
             **inputs,
-            max_length=max_length,
-            num_return_sequences=num_return_sequences,
             temperature=temperature,
             top_p=top_p,
             do_sample=do_sample,
@@ -261,35 +265,30 @@ class LLMModel:
         # Decodificar y limpiar respuesta
         response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         # Limpiar la respuesta para que no aparezca el prompt
-        clean_response = response.split('Answer:')[1].strip()
-        if len(clean_response)==0:
-          clean_response = 'I do not know'
-        return clean_response
+        return response.split("<|assistant|>")[1].strip()
 
     def __get_nocontext_prompt(self, query):
         return [
             {
                 "role": "system",
-                "content": "Give a comprehensive answer to the question. Respond only to the question asked, response should be concise and relevant to the question.",
+                "content": "Give a comprehensive answer to the question. Respond only to the question asked, response should be concise and relevant to the question. If you don't know the answer respond with 'I do not know the answer'.",
             },
-            {"role": "user", "content": "Question: " + query + "\nAnswer:"},
+            {"role": "user", "content": "Answer the following question: " + query + "\n"},
         ]
 
     def __get_context_prompt(self, query, context=""):
         context = "" if not context else context
         return [{
             "role": "system",
-            "content": "Use the following context to answer the question concisely and accurately. If the answer cannot be deduced from the context, do not answer the question and just say 'I do not know'.",
+            "content": "Use the following context to answer the question concisely and accurately. If the answer cannot be deduced from the context, do not answer the question and just say 'I do not know'. If you can answer with yes or no prioritize short answers.",
         },
-        {"role": "user", "content": "Context:\n"+'\n'.join(context)+"\nQuestion: "+query+"\nAnswer:"}
+        {"role": "user", "content": "Considering the following information:\n"+'\n'.join(context)+"\n answer to this question: "+query+"\n"}
     ]
 
-    def answer(self, query, context, use_context=False, do_sample=True, temperature=0.7,
-               top_p=0.9, max_length=2047, num_return_sequences=1, show_prompt=False):
-        prompt = self.__get_context_prompt(query,
-                                           context) if use_context or self.use_context else self.__get_nocontext_prompt(
-            query)
-        return self.__answer_with_model(prompt, do_sample, temperature, top_p, max_length, num_return_sequences, show_prompt)
+    def answer(self, query, context, use_context=False, do_sample=True, temperature=0.1,
+               top_p=0.9, max_length=2047, show_prompt=False):
+        prompt = self.__get_context_prompt(query, context) if use_context else self.__get_nocontext_prompt(query)
+        return self.__answer_with_model(prompt, do_sample, temperature, top_p, max_length, show_prompt)
 
 
 def format_dataset(dataset):
@@ -327,7 +326,7 @@ def evaluate_qa_system(models, dataset):
     vectorizer = TfidfVectorizer()
     rouge_scorer_obj = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
 
-    for model_name, model in models:
+    for model_name, model, context_usage in models:
         metrics = {
             "bleu": [],
             "rouge": {"rouge1": [], "rouge2": [], "rougeL": []},
@@ -343,7 +342,7 @@ def evaluate_qa_system(models, dataset):
             ground_truth = entry["answer"]
 
             # Respuesta del modelo
-            prediction = model.answer(query=query, context=context, do_sample=False, max_length=2048)
+            prediction = model.answer(query=query, context=context, use_context=context_usage)
 
             # BLEU
             smoothing_function = SmoothingFunction()

@@ -101,7 +101,7 @@ def evaluate_qa_answers(answers, gold_std):
 
         for idx, prediction in predictions.items():
             ground_truth = gold_std[idx]
-            # Respuesta del modelo
+
             # BLEU
             bleu_score = sentence_bleu([ground_truth.split()], prediction.split())
             metrics["bleu"].append(bleu_score)
@@ -153,7 +153,7 @@ class QuestionAnswering:
         self.generator = generator
         self.rag = rag
 
-    def answer(self, query, lang="spanish", do_sample=True, show_prompt=False,top_k=5, temperature=0.7):
+    def answer(self, query, lang="spanish", do_sample=True, show_prompt=False,top_k=5, temperature=0.1):
         relevant_documents = self.rag.search_documents(query, lang=lang, top_k=top_k)
         answer = self.generator.answer(query, relevant_documents, show_prompt=show_prompt, use_context=True, do_sample=do_sample, temperature=temperature)
         return answer
