@@ -12,6 +12,7 @@ import numpy as np
 import warnings
 import nltk
 nltk.download('wordnet')
+nltk.download('punkt_tab')
 
 def evaluate_qa_system_adv(models, dataset):
     results_by_model = {}
