@@ -1,0 +1,4 @@
+zlib1g-dev
+libjpeg-dev
+libpng-dev
+portaudio19-dev
