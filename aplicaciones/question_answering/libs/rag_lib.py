@@ -14,6 +14,8 @@ import re
 # Descarga de recursos necesarios
 nltk.download('punkt', quiet=True)
 nltk.download('stopwords', quiet=True)
+nltk.download('punkt_tab', quiet=True)
+
 import numpy as np
 
 class TextPreprocessor:
